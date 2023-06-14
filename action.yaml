@@ -1,0 +1,74 @@
+name: Publish to Cognite Data Model
+
+# Were we can define the inputs that our action will accept
+inputs:
+  clientId:
+    required: true
+  clientSecret:
+    required: true
+  cluster:
+    required: true
+  tenantId:
+    required: false
+  tokenUrl:
+    required: false
+  modelName:
+    required: true
+  modelFile:
+     required: true
+  space:
+    required: true
+  project:
+    required: true
+  version:
+    required: true
+
+runs:
+  using: "composite"
+  # Defining the action steps(Just one step to be simple)
+  steps:
+    - name: Signin to CDF
+      shell: bash
+      run: cdf signin ${{ inputs.project }} --client-id=${{ inputs.clientId }} --client-secret=${{ inputs.clientSecret }} --cluster=${{ inputs.cluster }} --tenant=${{ inputs.tenantId }}
+
+    - name: list Check Create datamodels
+      shell: bash
+      id: list-check-create
+      run: |
+        datamodels=$(cdf data-models list | awk 'NR>2 {print $4$6}')
+        datamodels_list=()
+
+        while IFS= read -r datamodel; do
+          datamodel=$(echo "$datamodel" | awk '{$1=$1};1')  # Remove leading/trailing whitespaces
+          datamodel=${datamodel// /}  # Eliminate all whitespaces
+          if [[ -n "$datamodel" ]]; then
+            datamodels_list+=("$datamodel")  # Append datamodel to the list
+          fi
+        done <<< "$datamodels"
+        echo "All data models in datamodels list:"
+
+        found=false
+        for item in "${datamodels_list[@]}"; do
+          echo "datamodel=$item"
+          if [[ $item == ${{ inputs.modelName }}${{ inputs.space }} ]]; then
+            echo "checking if item in model name"
+            found=true
+            break
+          fi
+        done
+
+        echo "::set-output name=found::$found"
+        if $found; then
+          echo "Model name ${{ inputs.modelName }} exists in datamodels"
+        else
+          echo "Model name ${{ inputs.modelName }} does not exist in datamodels, create and publish"
+            if cdf data-models create "${{ inputs.modelName }}" --external-id=${{ inputs.modelName }} --space=${{ inputs.space }} --verbose --interactive=false; then
+              echo "Data model created successfully."
+            else
+              echo "Error occurred while creating the data model. Skipping."
+            fi
+        fi
+
+    - name: Publish  datamodel
+      shell: bash
+      run: cdf data-models publish --external-id=${{ inputs.modelName }} --file=${{ inputs.modelFile }} --space=${{ inputs.space }} --version=${{ inputs.version }} --verbose --interactive=false
