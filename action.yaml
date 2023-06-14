@@ -14,6 +14,8 @@ inputs:
     required: false
   modelName:
     required: true
+  modelFile:
+     required: true
   space:
     required: true
   project:
@@ -69,4 +71,4 @@ runs:
 
     - name: Publish  datamodel
       shell: bash
-      run: cdf data-models publish --external-id=${{ inputs.modelName }} --file=./src/schemas/${{ inputs.modelName }}.graphql --space=${{ inputs.space }} --version=${{ inputs.version }} --verbose --interactive=false
+      run: cdf data-models publish --external-id=${{ inputs.modelName }} --file=${{ inputs.modelFile }} --space=${{ inputs.space }} --version=${{ inputs.version }} --verbose --interactive=false
