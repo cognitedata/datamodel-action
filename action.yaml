@@ -1,4 +1,4 @@
-name: Publish to FDM
+name: Publish to Cognite Data Model
 
 # Were we can define the inputs that our action will accept
 inputs:
@@ -9,7 +9,9 @@ inputs:
   cluster:
     required: true
   tenantId:
-    required: true
+    required: false
+  tokenUrl:
+    required: false
   modelName:
     required: true
   space:
