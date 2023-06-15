@@ -35,6 +35,8 @@ runs:
       shell: bash
       id: list-check-create
       run: |
+        python src/replace_vars.py --file=${{ inputs.modelFile }} --space=${{ intputs.space }} --version=${{ intputs.version }}
+
         datamodels=$(cdf data-models list | awk 'NR>2 {print $4$6}')
         datamodels_list=()
 
