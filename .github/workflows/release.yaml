@@ -41,4 +41,4 @@ jobs:
         context: .
         push: true
         file: ./Dockerfile
-        tags: cognite/datamodel-action:${{ steps.parse_version.outputs.version }}-github
+        tags: cognite/datamodel-action:${{ steps.parse_version.outputs.version }}
