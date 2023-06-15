@@ -12,3 +12,5 @@ This action deploys a DataModel to Cognite
 7. `cluster`
 8. `tenantId` - either use tenantId (with AAD) 
 9. `tokenUrl` - for other idPs
+
+If you have $VERSION or $SPACE in your graphql it will be replaced with supplied parameters before deploy.
