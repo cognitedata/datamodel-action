@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cdf signin $INPUT_PROJECT --client-id=$INPUT_CLIENTID --client-secret=$INPUT_CLIENTSECRET --cluster=$INPUT_CLUSTER --tenant=$INPUT_TENANTID
-python src/replace_vars.py --file=$INPUT_MODELFILE --space=$INPUT_SPACE --version=$INPUT_VERSION
+python replace_vars.py --file=$INPUT_MODELFILE --space=$INPUT_SPACE --version=$INPUT_VERSION
 
 datamodels=$(cdf data-models list | awk 'NR>2 {print $4$6}')
 datamodels_list=()
@@ -18,7 +18,7 @@ echo "All data models in datamodels list:"
 found=false
 for item in "${datamodels_list[@]}"; do
     echo "datamodel=$item"
-    if [[ $item == ${{ inputs.modelName }}${{ inputs.space }} ]]; then
+    if [[ $item == ${INPUT_MODELNAME}${INPUT_SPACE} ]]; then
     echo "checking if item in model name"
     found=true
     break
