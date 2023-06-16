@@ -3,7 +3,7 @@
 cdf signin $INPUT_PROJECT --client-id=$INPUT_CLIENTID --client-secret=$INPUT_CLIENTSECRET --cluster=$INPUT_CLUSTER --tenant=$INPUT_TENANTID
 python3 /replace_vars.py --file=$INPUT_MODELFILE --space=$INPUT_SPACE --version=$INPUT_VERSION
 
-datamodels=$(cdf data-models list | awk 'NR>2 {print $4$6}')
+datamodels=$(cdf data-models list --simple | awk -F , 'NR>2 {print $2$3}')
 datamodels_list=()
 
 while IFS= read -r datamodel; do
