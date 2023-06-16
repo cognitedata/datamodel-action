@@ -18,7 +18,7 @@ echo "All data models in datamodels list:"
 found=false
 for item in "${datamodels_list[@]}"; do
     echo "datamodel=$item"
-    if [[ $item == ${INPUT_MODELNAME}${INPUT_SPACE} ]]; then
+    if [[ $item == "${INPUT_MODELNAME}${INPUT_SPACE}" ]]; then
     echo "checking if item in model name"
     found=true
     break
