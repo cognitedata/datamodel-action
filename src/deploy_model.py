@@ -120,7 +120,7 @@ def main():
     with open(args.file, 'r') as file :
         filedata = file.read()
 
-    external_id = args.external_id if args.external_id else args.name
+    external_id = args.model_external_id if args.model_external_id else args.name
 
     dml = filedata.replace('$SPACE', args.space)
     dml = dml.replace('$VERSION', args.version)
