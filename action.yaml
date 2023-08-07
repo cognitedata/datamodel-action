@@ -15,7 +15,11 @@ inputs:
   modelName:
     required: true
   modelFile:
-     required: true
+    required: true
+  modelDescription:
+    required: false
+  modelExternalId:
+    required: false
   space:
     required: true
   project:

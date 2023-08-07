@@ -1,8 +1,5 @@
-FROM node:16
-
-RUN npm install --global @cognite/cdf-cli
+FROM python:3.9
  
-COPY src/replace_vars.py /replace_vars.py
-COPY src/deploy.sh /deploy.sh
+COPY src/deploy_model.py /deploy_model.py
 
-ENTRYPOINT ["bash", "/deploy.sh"]
+ENTRYPOINT ["python", "/deploy_model.py"]
