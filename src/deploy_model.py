@@ -18,15 +18,15 @@ def parse_args():
         default=os.environ.get("INPUT_SPACE", None),
         type=str)
     parser.add_argument(
-        "--model-name", reuired=True,
+        "--model-name", required=True,
         default=os.environ.get("INPUT_MODELNAME", None),
         type=str)
     parser.add_argument(
-        "--model-external-id", reuired=True,
+        "--model-external-id", required=True,
         default=os.environ.get("INPUT_MODELEXTERNALID", os.environ.get("INTPUT_MODELNAME", None)),
         type=str)
     parser.add_argument(
-        "--model-description", reuired=True,
+        "--model-description", required=True,
         default=os.environ.get("INPUT_MODELDESCRIPTION", None),
         type=str)
     parser.add_argument(
