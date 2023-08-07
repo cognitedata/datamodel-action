@@ -23,11 +23,11 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--model-external-id", reuired=True,
-        default=os.get("INPUT_MODEL_EXTERNAL_ID", os.get("INTPUT_MODELNAME", None)),
+        default=os.get("INPUT_MODELEXTERNALID", os.get("INTPUT_MODELNAME", None)),
         type=str)
     parser.add_argument(
         "--model-description", reuired=True,
-        default=os.get("INPUT_MODEL_DESCRIPTION", None),
+        default=os.get("INPUT_MODELDESCRIPTION", None),
         type=str)
     parser.add_argument(
         "--version", required=True,
@@ -35,11 +35,11 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--client-id", required=True,
-        default=os.get("INPUT_CLIENT_ID", None),
+        default=os.get("INPUT_CLIENTID", None),
         type=str)
     parser.add_argument(
         "--client-secret", required=True,
-        default=os.get("INPUT_CLIENT_SECRET", None),
+        default=os.get("INPUT_CLIENTSECRET", None),
         type=str)
     parser.add_argument(
         "--cluster", required=True,
@@ -47,11 +47,11 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--tenant-id", required=True,
-        default=os.get("INPUT_TENANT_ID", None),
+        default=os.get("INPUT_TENANTID", None),
         type=str)
     parser.add_argument(
         "--token-url", required=True,
-        default=os.get("INPUT_TOKEN_URL", None),
+        default=os.get("INPUT_TOKENURL", None),
         type=str)
     parser.add_argument(
         "--scopes", required=True,
