@@ -10,55 +10,55 @@ from cognite.client.data_classes.data_modeling import DataModelApply
 def parse_args():
     parser = argparse.ArgumentParser(description="Upload graphql datamodels to CDF")
     parser.add_argument(
-        "--file", required=True,
+        "--file", required=False,
         default=os.environ.get("INPUT_MODELFILE", None),
         type=str)
     parser.add_argument(
-        "--space", required=True,
+        "--space", required=False,
         default=os.environ.get("INPUT_SPACE", None),
         type=str)
     parser.add_argument(
-        "--model-name", required=True,
+        "--model-name", required=False,
         default=os.environ.get("INPUT_MODELNAME", None),
         type=str)
     parser.add_argument(
-        "--model-external-id", required=True,
+        "--model-external-id", required=False,
         default=os.environ.get("INPUT_MODELEXTERNALID", os.environ.get("INTPUT_MODELNAME", None)),
         type=str)
     parser.add_argument(
-        "--model-description", required=True,
+        "--model-description", required=False,
         default=os.environ.get("INPUT_MODELDESCRIPTION", None),
         type=str)
     parser.add_argument(
-        "--version", required=True,
+        "--version", required=False,
         default=os.environ.get("INPUT_VERSION", None),
         type=str)
     parser.add_argument(
-        "--client-id", required=True,
+        "--client-id", required=False,
         default=os.environ.get("INPUT_CLIENTID", None),
         type=str)
     parser.add_argument(
-        "--client-secret", required=True,
+        "--client-secret", required=False,
         default=os.environ.get("INPUT_CLIENTSECRET", None),
         type=str)
     parser.add_argument(
-        "--cluster", required=True,
+        "--cluster", required=False,
         default=os.environ.get("INPUT_CLUSTER", None),
         type=str)
     parser.add_argument(
-        "--tenant-id", required=True,
+        "--tenant-id", required=False,
         default=os.environ.get("INPUT_TENANTID", None),
         type=str)
     parser.add_argument(
-        "--token-url", required=True,
+        "--token-url", required=False,
         default=os.environ.get("INPUT_TOKENURL", None),
         type=str)
     parser.add_argument(
-        "--scopes", required=True,
+        "--scopes", required=False,
         default=os.environ.get("INPUT_SCOPES", None),
         type=str)
     parser.add_argument(
-        "--audience", required=True,
+        "--audience", required=False,
         default=os.environ.get("INPUT_AUDIENCE", None),
         type=str)
 
