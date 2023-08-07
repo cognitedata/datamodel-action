@@ -19,11 +19,11 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--model-name", reuired=True,
-        default=os.get("INTPUT_MODELNAME", None)
+        default=os.get("INPUT_MODELNAME", None),
         type=str)
     parser.add_argument(
         "--model-external-id", reuired=True,
-        default=os.get("INPUT_MODEL_EXTERNAL_ID", os.get("INTPUT_MODELNAME", None))
+        default=os.get("INPUT_MODEL_EXTERNAL_ID", os.get("INTPUT_MODELNAME", None)),
         type=str)
     parser.add_argument(
         "--model-description", reuired=True,
@@ -31,14 +31,73 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--version", required=True,
-        default=os.get("INPUT_VERSION", None)
+        default=os.get("INPUT_VERSION", None),
+        type=str)
+    parser.add_argument(
+        "--client-id", required=True,
+        default=os.get("INPUT_CLIENT_ID", None),
+        type=str)
+    parser.add_argument(
+        "--client-secret", required=True,
+        default=os.get("INPUT_CLIENT_SECRET", None),
+        type=str)
+    parser.add_argument(
+        "--cluster", required=True,
+        default=os.get("INPUT_CLUSTER", None),
+        type=str)
+    parser.add_argument(
+        "--tenant-id", required=True,
+        default=os.get("INPUT_TENANT_ID", None),
+        type=str)
+    parser.add_argument(
+        "--token-url", required=True,
+        default=os.get("INPUT_TOKEN_URL", None),
+        type=str)
+    parser.add_argument(
+        "--scopes", required=True,
+        default=os.get("INPUT_SCOPES", None),
+        type=str)
+    parser.add_argument(
+        "--audience", required=True,
+        default=os.get("INPUT_AUDIENCE", None),
         type=str)
 
     return parser.parse_args()
 
+def get_cognite_client(args):
+
+    if args.tenant_id:
+        token_url = f"https://login.microsoftonline.com/{args.tenant_id}/oauth2/v2.0/token"
+    else:
+        token_url = args.token_url
+
+    if args.scopes:
+        scopes = args.scopes
+    else:
+        scopes = f"https://{args.cluster}.cognitedata.com/.default"
+
+    oauth_provider = OAuthClientCredentials(
+        token_url=token_url,
+        client_id=args.client_id,
+        client_secret=args.client_secret,
+        scopes=scopes.split(' '),
+        #Any additional IDP-specific token args. e.g.
+        audience=args.audience,
+    )
+
+    cnf = ClientConfig(
+        client_name="datamodel-deploy",
+        project=args.project,
+        credentials=oauth_provider,
+        base_url=f"https://{args.cluster}.cognitedata.com",
+        debug=False
+    )
+
+    return CogniteClient(config=cnf)
 
 def main():
     args = parse_args()
+    client = get_cognite_client(args)
 
     with open(args.file, 'r') as file :
         filedata = file.read()

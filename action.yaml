@@ -12,6 +12,10 @@ inputs:
     required: false
   tokenUrl:
     required: false
+  scopes:
+    required: False
+  audience:
+    required: False
   modelName:
     required: true
   modelFile:
