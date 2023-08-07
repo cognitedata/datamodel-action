@@ -69,19 +69,19 @@ def parse_args():
     return parser.parse_args()
 
 def print_args(args):
-    print(args.file)
-    print(args.space)
-    print(args.model_name)
-    print(args.model_external_id)
-    print(args.model_description)
-    print(args.version)
-    print(args.client_id)
-    print(args.cluster)
-    print(args.project)
-    print(args.tenant_id)
-    print(args.token_url)
-    print(args.scopes)
-    print(args.audience)
+    print(f"file: {args.file}")
+    print(f"space: {args.space}")
+    print(f"model_name: {args.model_name}")
+    print(f"model_external_id: {args.model_external_id}")
+    print(f"model_description: {args.model_description}")
+    print(f"version: {args.version}")
+    print(f"client_id: {args.client_id}")
+    print(f"cluster: {args.cluster}")
+    print(f"project: {args.project}")
+    print(f"tenant_id: {args.tenant_id}")
+    print(f"token_url: {args.token_url}")
+    print(f"scopes: {args.scopes}")
+    print(f"audience: {args.audience}")
 
 
 def get_cognite_client(args):
