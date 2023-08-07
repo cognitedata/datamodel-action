@@ -114,9 +114,6 @@ def main():
     else:
         print("No space or version variables in data model")
 
-    print("Initialize CogniteClient")
-    client = CogniteClient()
-
     space = client.data_modeling.spaces.retrieve(space=args.space)
 
     if not space:    
