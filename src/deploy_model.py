@@ -68,6 +68,22 @@ def parse_args():
 
     return parser.parse_args()
 
+def print_args(args):
+    print(args.file)
+    print(args.space)
+    print(args.model_name)
+    print(args.model_external_id)
+    print(args.model_description)
+    print(args.version)
+    print(args.client_id)
+    print(args.cluster)
+    print(args.project)
+    print(args.tenant_id)
+    print(args.token_url)
+    print(args.scopes)
+    print(args.audience)
+
+
 def get_cognite_client(args):
 
     if args.tenant_id:
@@ -101,6 +117,7 @@ def get_cognite_client(args):
 
 def main():
     args = parse_args()
+    print_args(args)
     client = get_cognite_client(args)
 
     with open(args.file, 'r') as file :
