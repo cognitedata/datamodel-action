@@ -23,7 +23,7 @@ def parse_args():
         type=str)
     parser.add_argument(
         "--model-external-id", required=False,
-        default=os.environ.get("INPUT_MODELEXTERNALID", os.environ.get("INTPUT_MODELNAME", None)),
+        default=os.environ.get("INPUT_MODELEXTERNALID", None),
         type=str)
     parser.add_argument(
         "--model-description", required=False,
@@ -91,10 +91,7 @@ def get_cognite_client(args):
     else:
         token_url = args.token_url
 
-    if args.scopes:
-        scopes = args.scopes
-    else:
-        scopes = f"https://{args.cluster}.cognitedata.com/.default"
+    scopes = args.scopes if args.scopes else f"https://{args.cluster}.cognitedata.com/.default"
 
     oauth_provider = OAuthClientCredentials(
         token_url=token_url,
@@ -122,7 +119,9 @@ def main():
 
     with open(args.file, 'r') as file :
         filedata = file.read()
-    
+
+    external_id = args.external_id if args.external_id else args.name
+
     dml = filedata.replace('$SPACE', args.space)
     dml = dml.replace('$VERSION', args.version)
 
@@ -140,7 +139,7 @@ def main():
     print(f"Update Data Model: {args.model_name} Version: {args.version}")
     data_model = [DataModelApply(
                         space=args.space,
-                        external_id=args.model_external_id,
+                        external_id=external_id,
                         name=args.model_name,
                         version=args.version,
                         description=args.model_description)
