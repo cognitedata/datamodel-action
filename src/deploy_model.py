@@ -128,6 +128,7 @@ def main():
                         version=args.version,
                         description=args.model_description)
                     ]
+    print(data_model)
     client.data_modeling.data_models.apply(data_model)
 
 if __name__ == "__main__":
