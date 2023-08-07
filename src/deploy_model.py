@@ -11,55 +11,55 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Upload graphql datamodels to CDF")
     parser.add_argument(
         "--file", required=True,
-        default=os.get("INPUT_MODELFILE", None),
+        default=os.environ.get("INPUT_MODELFILE", None),
         type=str)
     parser.add_argument(
         "--space", required=True,
-        default=os.get("INPUT_SPACE", None),
+        default=os.environ.get("INPUT_SPACE", None),
         type=str)
     parser.add_argument(
         "--model-name", reuired=True,
-        default=os.get("INPUT_MODELNAME", None),
+        default=os.environ.get("INPUT_MODELNAME", None),
         type=str)
     parser.add_argument(
         "--model-external-id", reuired=True,
-        default=os.get("INPUT_MODELEXTERNALID", os.get("INTPUT_MODELNAME", None)),
+        default=os.environ.get("INPUT_MODELEXTERNALID", os.environ.get("INTPUT_MODELNAME", None)),
         type=str)
     parser.add_argument(
         "--model-description", reuired=True,
-        default=os.get("INPUT_MODELDESCRIPTION", None),
+        default=os.environ.get("INPUT_MODELDESCRIPTION", None),
         type=str)
     parser.add_argument(
         "--version", required=True,
-        default=os.get("INPUT_VERSION", None),
+        default=os.environ.get("INPUT_VERSION", None),
         type=str)
     parser.add_argument(
         "--client-id", required=True,
-        default=os.get("INPUT_CLIENTID", None),
+        default=os.environ.get("INPUT_CLIENTID", None),
         type=str)
     parser.add_argument(
         "--client-secret", required=True,
-        default=os.get("INPUT_CLIENTSECRET", None),
+        default=os.environ.get("INPUT_CLIENTSECRET", None),
         type=str)
     parser.add_argument(
         "--cluster", required=True,
-        default=os.get("INPUT_CLUSTER", None),
+        default=os.environ.get("INPUT_CLUSTER", None),
         type=str)
     parser.add_argument(
         "--tenant-id", required=True,
-        default=os.get("INPUT_TENANTID", None),
+        default=os.environ.get("INPUT_TENANTID", None),
         type=str)
     parser.add_argument(
         "--token-url", required=True,
-        default=os.get("INPUT_TOKENURL", None),
+        default=os.environ.get("INPUT_TOKENURL", None),
         type=str)
     parser.add_argument(
         "--scopes", required=True,
-        default=os.get("INPUT_SCOPES", None),
+        default=os.environ.get("INPUT_SCOPES", None),
         type=str)
     parser.add_argument(
         "--audience", required=True,
-        default=os.get("INPUT_AUDIENCE", None),
+        default=os.environ.get("INPUT_AUDIENCE", None),
         type=str)
 
     return parser.parse_args()
