@@ -147,5 +147,12 @@ def main():
     print(data_model)
     client.data_modeling.data_models.apply(data_model)
 
+    print("Apply DML")
+    client.data_modeling.graphql.apply_dml((
+            args.space,
+            external_id,
+            args.version),
+            dml=dml)
+
 if __name__ == "__main__":
     main()
