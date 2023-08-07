@@ -46,6 +46,10 @@ def parse_args():
         default=os.environ.get("INPUT_CLUSTER", None),
         type=str)
     parser.add_argument(
+        "--project", required=False,
+        default=os.environ.get("INPUT_PROJECT", None),
+        type=str)
+    parser.add_argument(
         "--tenant-id", required=False,
         default=os.environ.get("INPUT_TENANTID", None),
         type=str)
