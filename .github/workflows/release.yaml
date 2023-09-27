@@ -42,3 +42,11 @@ jobs:
         push: true
         file: ./Dockerfile
         tags: cognite/datamodel-action:${{ steps.parse_version.outputs.version }}
+
+    - name: "Build and push Docker image for Azure devops pipelines"
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        file: ./Dockerfile-azure
+        tags: cognite/datamodel-action:${{ steps.parse_version.outputs.version }}-azure
