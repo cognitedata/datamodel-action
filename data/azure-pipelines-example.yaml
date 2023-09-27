@@ -1,0 +1,36 @@
+parameters:
+- name: RUN_DEBUG_MODE
+  displayName: Run Debug Mode
+  type: boolean
+  default: True
+  values:
+    - True
+    - False
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+container:
+  image: cognite/datamodel-action:x.x.x-azure
+
+steps:
+  - script: python /deploy_model.py
+    displayName: Publish to Cognite Data Model
+    env:
+        clientId: $(clientId)
+        clientSecret: $(clientSecret)
+        cluster: $(cluster)
+        tenantId: $(tenantId)
+        tokenUrl: $(tokenUrl)
+        scopes: $(scopes)
+        audience: $(audience)
+        modelName: $(modelName)
+        modelFile: $(modelFile)
+        modelDescription: $(modelDescription)
+        modelExternalId: $(modelExternalId)
+        space: $(space)
+        project: $(project)
+        version: $(version)
